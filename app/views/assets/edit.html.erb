@@ -1,0 +1,14 @@
+<div class="text-center">
+  <h1>Editing File</h1>
+</div>
+
+<br>
+<br>
+<br>
+<%= render 'edit_form', user: @user, asset: @asset %>
+<div class="text-center edit-links">
+  <%= link_to 'Show', user_asset_path(@user, @asset) %> |
+  <%= link_to 'Back', user_assets_path %>
+</div>
+
+

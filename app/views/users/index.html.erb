@@ -1,0 +1,36 @@
+<% provide(:title, 'All Users') %>
+
+<div class="center jumbotron">
+  <h1>Users</h1>
+</div>
+
+
+
+<%= will_paginate %>
+
+<ul class="users">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <% if is_admin? %>
+          <th>Privilege</th>
+          <th></th>
+      <% end %>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render @users %>
+    </tbody>
+  </table>
+</ul>
+
+<%= will_paginate %>
+
+<div class="row">
+  <% if is_admin? %>
+      <%= link_to "Create New Account", new_user_path, :class => "btn btn-primary" %>
+  <% end %>
+</div>

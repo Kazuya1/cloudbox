@@ -1,0 +1,30 @@
+
+<tr>
+  <td>
+    <%= link_to user.username, user %>
+  </td>
+  <td>
+    <%= user.email %>
+  </td>
+  <% if is_admin? && !current_user?(user) %>
+      <td>
+        <%= user.privilege %>
+      </td>
+
+  <% end %>
+  <% if !current_user?(user) %>
+      <% if current_user.is_friends_with?(user) %>
+          <td><%= link_to "Remove Friend", remove_friend_user_path(user.id), method: :delete, class: 'btn btn-primary btn-xs' %></td>
+      <% else %>
+          <td><%= link_to "Add Friend", add_friend_user_path(user.id), method: :post, class: 'btn btn-primary btn-xs' %></td>
+      <% end %>
+  <% else %><td></td>
+  <% end %>
+  <% if is_admin? && !current_user?(user) %>
+      <td>
+        <%= render 'deactivateuserform', user: user %>
+      </td>
+  <% end %>
+
+</tr>
+

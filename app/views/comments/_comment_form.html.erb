@@ -1,0 +1,12 @@
+<div class="comment-like-form row">
+  <div class="like-button col-sm-1">
+    <%= link_to '', (user_liked_post?(post) ? unlike_post_path(post.id) : like_post_path(post.id)), remote: true, id: "like_#{post.id}", class: "glyphicon like #{liked_post post}" %>
+  </div>
+
+  <div class="comment-form col-sm-11">
+    <%= simple_form_for [post, post.comments.new], remote: true do |f| %>
+        <%= f.text_field :content, placeholder: "Add a comment...", class:"comment_content", id: "comment_content_#{post.id}" %>
+        <!--<%= f.submit 'New Comment', class: 'comment-submit-button' %>-->
+    <% end %>
+  </div>
+</div>

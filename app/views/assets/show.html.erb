@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<br>
+<br>
+
+<div class="text-center">
+  <h2><%= link_to @user.username, user_path(@user.id) %></h2>
+</div>
+<br>
+<br>
+
+<p><strong>Name:</strong> <%= @asset.custom_name %><br>
+  <strong>Filename:</strong> : <%= link_to @asset.filename %>
+</p>
+
+  <%= form_tag share_assets_user_asset_path(@user, @asset), controller: 'assets', method: :post do |f| %>
+
+      <div class="form-group">
+        <%= label_tag :user_shared_list, "Share With: ", class: 'control-label' %>
+        <div class="col-lg-14">
+          <%= select_tag :user_shared_list, options_for_select(User.all.map { |u| [u.username, u.username] }, @shared_with),
+                         { include_blank: true, multiple: true, class: 'chosen-select' } %>
+        </div>
+      </div>
+      <br>
+      <br>
+
+    <%= submit_tag "Share with Selected", class: "btn btn-primary", type: "submit" %>
+
+    <%= link_to "Share with All Friends", share_with_all_friends_user_asset_path(@user, @asset), method: :post, class:"btn btn-success" %>
+
+<% end %>
+
+<br>
+
+
+<%= link_to 'Edit', edit_user_asset_path(@user, @asset) %> |
+<%= link_to 'Back', user_assets_path(@user) %>

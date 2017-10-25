@@ -1,0 +1,50 @@
+<nav class="nav navbar navbar-default">
+  <div class="navbar-container">
+    <div class="navbar-header">
+      <button type="button" class="btn navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand">
+        <%= link_to "CloudBox", posts_path %>
+      </div>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        <% if logged_in? %>
+            <li><%= link_to "New Post", new_post_path %></li>
+            <li><%= link_to "New File", new_user_asset_path(current_user)%></li>
+      <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if logged_in? %>
+            <li><%= link_to current_user.username, user_path(current_user.id) %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" id="drop_down_account" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Users", users_path %></li>
+                <li><%= link_to "Files", user_assets_path(current_user) %></li>
+                <li><%= link_to "Friends", user_friends_path(current_user) %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "My Account", user_path(current_user) %></li>
+                <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+              </ul>
+            </li>
+        <% else %>
+            <div class="navbar-form navbar-right">
+              <%= link_to "Sign up", new_user_path %> |
+              <%= link_to "Log in", login_path %>
+            </div>
+        <% end %>
+      </ul>
+
+
+    </div><!-- /.navbar-collapse -->
+  </div>
+
+</nav>
